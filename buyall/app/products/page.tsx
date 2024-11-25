@@ -1,28 +1,35 @@
-import React from "react";
+"use client";
 
 interface Product {
   id: number;
   name: string;
-  price: number;
   description: string;
+  price: number;
+  image: {
+    url: string;
+    alt: string;
+  };
 }
 
-const products: Product[] = [
-  { id: 1, name: "Product 1", price: 100, description: "Description for product 1" },
-  { id: 2, name: "Product 2", price: 200, description: "Description for product 2" },
-  { id: 3, name: "Product 3", price: 300, description: "Description for product 3" },
-];
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const ProductsPage: React.FC = () => {
+interface ProductDetailProps {
+  products: Product[];
+}
+
+const ProductList = ({ products }: ProductDetailProps) => {
   return (
     <div>
-      <h1>Products</h1>
+      <h1>Product Details</h1>
       <ul>
         {products.map((product) => (
           <li key={product.id}>
             <h2>{product.name}</h2>
-            <p>{product.description}</p>
             <p>Price: ${product.price}</p>
+            <Link href={`/products/${product.id}`}>
+              <a>View Product</a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -30,4 +37,39 @@ const ProductsPage: React.FC = () => {
   );
 };
 
-export default ProductsPage;
+const ProductDetail = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://v2.api.noroff.dev/online-shop");
+        const products = await response.json();
+        setProducts(products);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return (
+    <div>
+      <h1>Product Details</h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            <h2>{product.name}</h2>
+            <p>Price: ${product.price}</p>
+            <Link href={`/products/${product.id}`}>
+              <a>View Product</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ProductList;

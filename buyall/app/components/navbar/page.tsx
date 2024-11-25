@@ -1,7 +1,8 @@
 "use client";
 
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 interface NavigationItem {
@@ -10,9 +11,9 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-  { name: "Dashboard", href: "/" },
+  { name: "Home", href: "/" },
   { name: "Products", href: "/products" },
-  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 function classNames(...classes: (string | boolean | undefined)[]): string {
@@ -35,7 +36,7 @@ export function NavBar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <img alt="BuyAll" src="/buyall/images/BuyAll.png" className="h-8 w-auto" />
+              <Image aria-label="BuyAll" src="/buyall/images/BuyAll.png" alt="BuyAll Logo" width={32} height={32} className="h-8 w-auto" />
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
@@ -56,10 +57,11 @@ export function NavBar() {
             <button
               type="button"
               className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              onClick={() => (window.location.href = "/checkout")}
             >
               <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="size-6" />
+              <span className="sr-only">View cart</span>
+              <ShoppingCartIcon aria-hidden="true" className="size-6" />
             </button>
 
             {/* Profile dropdown */}
@@ -69,7 +71,7 @@ export function NavBar() {
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
                   <img
-                    alt=""
+                    aria-label="User"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     className="size-8 rounded-full"
                   />
