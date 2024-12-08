@@ -71,4 +71,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductList;
+export default ProductDetail;
