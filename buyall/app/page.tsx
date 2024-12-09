@@ -90,7 +90,7 @@ const Products: React.FC = () => {
                 style={{ backgroundColor: "#3182ce", color: "#fff", padding: "0.5rem 1rem", borderRadius: "0.25rem", cursor: "pointer", transition: "background-color 0.3s" }}
                 onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#2b6cb0")}
                 onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#3182ce")}
-                onClick={() => router.push(`/products/${product.id}`)}
+                onClick={() => router.push(`/product/${product.id}`)}
               >
                 View Product
               </button>
