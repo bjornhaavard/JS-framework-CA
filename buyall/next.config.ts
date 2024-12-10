@@ -4,7 +4,15 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   images: {
+    dangerouslyAllowSVG: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*",
+      },
+    ],
     domains: ["static.noroff.dev", "static.noroff.dev/api/online-shop"],
   },
-  basePath: "/buyall",
 };
+
+export default nextConfig;
