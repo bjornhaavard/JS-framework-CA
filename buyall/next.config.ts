@@ -6,6 +6,5 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["static.noroff.dev", "static.noroff.dev/api/online-shop"],
   },
+  basePath: "/buyall",
 };
-
-export default nextConfig;
