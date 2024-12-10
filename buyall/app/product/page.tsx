@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,19 +49,22 @@ const ProductDetail = () => {
   }
 
   return (
-    <div>
-      <h1>{product.name}</h1>
+    <>
+      <section className="blue-container">
+        <h1 className="heading">{product.name}</h1>
+      </section>
+      <div>
+        <Image src={product.image.url} alt={product.image.alt} width={500} height={500} />
 
-      <Image src={product.image.url} alt={product.image.alt} width={500} height={500} />
+        <p>{product.description}</p>
 
-      <p>{product.description}</p>
+        <p>Price: ${product.price}</p>
 
-      <p>Price: ${product.price}</p>
-
-      <Link href="/products">
-        <a>Back to Products</a>
-      </Link>
-    </div>
+        <Link href="/products">
+          <a>Back to Products</a>
+        </Link>
+      </div>
+    </>
   );
 };
 
