@@ -2,7 +2,7 @@
 
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
-// import Image from "next/image";
+import useCartStore from "../../store/userCartStore";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -22,7 +22,9 @@ function classNames(...classes: (string | boolean | undefined)[]): string {
 
 export function NavBar() {
   const pathname = usePathname();
-  const cartItemCount = 0; // Replace 0 with the actual cart item count logic
+  // const cartItemCount = 0; // Replace 0 with the actual cart item count logic
+  const items = useCartStore((state) => state.items);
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredResults, setFilteredResults] = useState<{ name: string }[]>([]);
 
@@ -114,9 +116,9 @@ export function NavBar() {
               <span className="absolute -inset-1.5" />
               <span className="sr-only">View cart</span>
               <ShoppingCartIcon aria-hidden="true" className="size-6" />
-              {cartItemCount > 0 && (
+              {itemCount > 0 && (
                 <span className="absolute top-0 right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-800 rounded-full">
-                  {cartItemCount}
+                  {itemCount}
                 </span>
               )}
             </button>
@@ -174,3 +176,50 @@ export function NavBar() {
 }
 
 export default NavBar;
+
+// "use client";
+
+// import React from "react";
+// import Link from "next/link";
+// import { ShoppingCart } from "lucide-react";
+// import useCartStore from "../../store/userCartStore";
+
+// const Navbar: React.FC = () => {
+//   const items = useCartStore((state) => state.items);
+//   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+//   return (
+//     <nav style={{ backgroundColor: "#fff", boxShadow: "0 2px 4px rgba(0,0,0,0.1)", padding: "1rem 0" }}>
+//       <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+//         <Link href="/" style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#2d3748" }}>
+//           buyall
+//         </Link>
+//         <div style={{ position: "relative" }}>
+//           <ShoppingCart style={{ width: "24px", height: "24px", color: "#4a5568" }} />
+//           {itemCount > 0 && (
+//             <span
+//               style={{
+//                 position: "absolute",
+//                 top: "-8px",
+//                 right: "-8px",
+//                 backgroundColor: "#e53e3e",
+//                 color: "#fff",
+//                 borderRadius: "50%",
+//                 width: "20px",
+//                 height: "20px",
+//                 display: "flex",
+//                 alignItems: "center",
+//                 justifyContent: "center",
+//                 fontSize: "0.75rem",
+//               }}
+//             >
+//               {itemCount}
+//             </span>
+//           )}
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;

@@ -1,47 +1,76 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
+import useCartStore from "../store/userCartStore";
+import Link from "next/link";
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
+const ShoppingCart: React.FC = () => {
+  const { items, removeItem, updateQuantity, clearCart } = useCartStore();
 
-const CheckoutPage: React.FC = () => {
-  const [cart, setCart] = useState<Product[]>([]);
+  const totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Fetch cart items from local storage or API
-      const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-      setCart(storedCart);
+  const handleQuantityChange = (id: number, value: string) => {
+    const quantity = parseInt(value, 10);
+    if (!isNaN(quantity) && quantity > 0) {
+      updateQuantity(id, quantity);
     }
-  }, []);
-
-  const calculateTotal = () => {
-    return cart.reduce((total, product) => total + product.price * product.quantity, 0);
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-2xl">
-        <h1 className="text-2xl font-bold mb-4 text-gray-700 text-center">Checkout</h1>
-        <ul className="mb-4">
-          {cart.map((product) => (
-            <li key={product.id} className="flex justify-between items-center p-2 border-b border-gray-200 text-gray-700">
-              <span>{product.name}</span>
-              <span>
-                ${product.price} x {product.quantity}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <h2 className="text-xl font-semibold text-gray-700 text-center">Total: ${calculateTotal().toFixed(2)}</h2>
+    <>
+      <section className="blue-container">
+        <h1 className="heading">Shopping Cart</h1>
+      </section>
+      <div className="p-4 border rounded shadow-lg">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Shopping Cart</h2>
+        {items.length === 0 ? (
+          <p className="text-gray-800">Your cart is empty</p>
+        ) : (
+          <>
+            {items.map((item) => (
+              <div key={item.id} className="flex items-center justify-between mb-2">
+                <span className="bg-gray-800">
+                  {item.name} - ${item.price}
+                </span>
+                <div className="flex items-center">
+                  <button onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))} className="px-2 py-1 bg-gray-800 rounded">
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    min="1"
+                    value={item.quantity}
+                    onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
+                    className="w-16 mx-2 px-2 py-1 border rounded text-gray-800"
+                  />
+                  <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-2 py-1 bg-gray-800 rounded">
+                    +
+                  </button>
+                  <button onClick={() => removeItem(item.id)} className="ml-2 px-2 py-1 bg-gray-800 rounded">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+            <div className="mt-4">
+              <strong className="text-gray-800">Total: ${totalPrice.toFixed(2)}</strong>
+            </div>
+            <button onClick={clearCart} className="mt-4 px-4 py-2 bg-gray-800 text-white rounded">
+              Clear Cart
+            </button>
+            <button
+              onClick={() => {
+                clearCart();
+              }}
+              className="mt-4 ml-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-500 transition duration-300"
+            >
+              <Link href="/checkoutSuccess">Checkout</Link>
+            </button>
+          </>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
-export default CheckoutPage;
+export default ShoppingCart;
