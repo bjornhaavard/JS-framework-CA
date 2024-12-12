@@ -30,9 +30,9 @@ export async function generateStaticParams() {
   }));
 }
 
-import { GetStaticProps, GetStaticPropsContext } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
-export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const params = context.params;
   const id = params?.id as string;
   const product = await getProduct(id);
