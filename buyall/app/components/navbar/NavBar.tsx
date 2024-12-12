@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon, ShoppingCartIcon } from "@heroicons/react/24/outl
 import useCartStore from "../../store/userCartStore";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface NavigationItem {
   name: string;
@@ -22,7 +23,6 @@ function classNames(...classes: (string | boolean | undefined)[]): string {
 
 export function NavBar() {
   const pathname = usePathname();
-  // const cartItemCount = 0; // Replace 0 with the actual cart item count logic
   const items = useCartStore((state) => state.items);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -75,8 +75,15 @@ export function NavBar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center font-extrabold">
-              BuyAll
-              {/* <Image aria-label="BuyAll" src="/buyall/images/BuyAll.jpg" alt="BuyAll Logo" width={32} height={32} className="h-8 w-auto" /> */}
+              <Image
+                aria-label="BuyAll"
+                src="/images/BuyAll.png"
+                alt="BuyAll Logo"
+                width={64}
+                height={42}
+                quality={100} // Set to maximum quality
+                className="h-auto w-auto rounded-md"
+              />
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">

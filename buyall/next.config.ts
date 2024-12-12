@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: "export",
 
   images: {
     dangerouslyAllowSVG: true,
@@ -12,6 +13,7 @@ const nextConfig: NextConfig = {
       },
     ],
     domains: ["static.noroff.dev", "static.noroff.dev/api/online-shop"],
+    unoptimized: true,
   },
 };
 
