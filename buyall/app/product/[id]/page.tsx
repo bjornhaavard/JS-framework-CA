@@ -115,7 +115,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductDetail({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id);
+  const { id } = await params;
+  const product = await getProduct(id);
 
   return (
     <>

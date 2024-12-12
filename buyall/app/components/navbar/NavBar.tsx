@@ -81,8 +81,8 @@ export function NavBar() {
                 alt="BuyAll Logo"
                 width={64}
                 height={42}
-                quality={100} // Set to maximum quality
-                className="h-auto w-auto rounded-md"
+                quality={80}
+                className="h-10 w-auto rounded-md" // Adjusted height to control the size
               />
             </div>
             <div className="hidden sm:ml-6 sm:block">
