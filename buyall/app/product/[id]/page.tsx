@@ -30,13 +30,21 @@ export async function generateStaticParams() {
   }));
 }
 
-import { GetStaticPropsContext } from "next";
+import { GetStaticProps, GetStaticPropsContext } from "next";
 
-export default async function ProductDetail(context: GetStaticPropsContext): Promise<JSX.Element> {
-  const params = await context.params;
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const params = context.params;
   const id = params?.id as string;
   const product = await getProduct(id);
 
+  return {
+    props: {
+      product,
+    },
+  };
+};
+
+export default function ProductDetail({ product }: { product: Product }): JSX.Element {
   return (
     <>
       <section className="blue-container">
