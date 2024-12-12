@@ -116,7 +116,8 @@ export async function generateStaticParams() {
 
 import { GetStaticPropsContext } from "next";
 
-export default async function ProductDetail({ params }: GetStaticPropsContext): Promise<JSX.Element> {
+export default async function ProductDetail(context: GetStaticPropsContext): Promise<JSX.Element> {
+  const params = await context.params;
   const id = params?.id as string;
   const product = await getProduct(id);
 

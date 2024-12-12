@@ -79,8 +79,8 @@ export function NavBar() {
                 aria-label="BuyAll"
                 src="/images/BuyAll.png"
                 alt="BuyAll Logo"
-                width={64}
-                height={42}
+                width={54}
+                height={32}
                 quality={80}
                 className="h-10 w-auto rounded-md" // Adjusted height to control the size
               />
