@@ -114,7 +114,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProductDetail({ params }: { params: { id: string } }) {
+export default async function ProductDetail({ params }: { params: { id: string } }): Promise<JSX.Element> {
   const { id } = await params;
   const product = await getProduct(id);
 
