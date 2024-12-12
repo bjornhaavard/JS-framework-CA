@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
     domains: ["static.noroff.dev", "static.noroff.dev/api/online-shop"],
     unoptimized: true,
   },
+  trailingSlash: true,
 };
 
 export default nextConfig;
