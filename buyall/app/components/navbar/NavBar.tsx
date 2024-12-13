@@ -4,7 +4,6 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, XMarkIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import useCartStore from "../../store/userCartStore";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 
 interface NavigationItem {
@@ -25,43 +24,9 @@ export function NavBar() {
   const pathname = usePathname();
   const items = useCartStore((state) => state.items);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredResults, setFilteredResults] = useState<{ name: string }[]>([]);
-
-  useEffect(() => {
-    if (searchQuery.length > 0) {
-      fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(async (response) => {
-          if (!response.ok) {
-            const errorText = await response.text();
-            console.error(`Network response was not ok: ${errorText}`);
-            setFilteredResults([]);
-            return;
-          }
-          const data = await response.json();
-          if (data && data.results) {
-            setFilteredResults(data.results);
-          } else {
-            setFilteredResults([]);
-          }
-        })
-        .catch((error) => console.error("Error fetching search results:", error));
-    } else {
-      setFilteredResults([]);
-    }
-  }, [searchQuery]);
-
-  const handleSearchResultClick = (productName: string) => {
-    window.location.href = `/products?search=${encodeURIComponent(productName)}`;
-  };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -100,20 +65,7 @@ export function NavBar() {
               </div>
             </div>
           </div>
-          <div className="relative mx-4">
-            <input type="text" className="rounded-md bg-gray-700 text-white px-3 py-2 text-sm" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-            {searchQuery && (
-              <div className="absolute mt-1 w-full bg-white rounded-md shadow-lg z-10">
-                <ul>
-                  {filteredResults.map((result, index) => (
-                    <li key={index} className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={() => handleSearchResultClick(result.name)}>
-                      {result.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+          <div className="relative mx-4"></div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button
               type="button"
@@ -183,50 +135,3 @@ export function NavBar() {
 }
 
 export default NavBar;
-
-// "use client";
-
-// import React from "react";
-// import Link from "next/link";
-// import { ShoppingCart } from "lucide-react";
-// import useCartStore from "../../store/userCartStore";
-
-// const Navbar: React.FC = () => {
-//   const items = useCartStore((state) => state.items);
-//   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-
-//   return (
-//     <nav style={{ backgroundColor: "#fff", boxShadow: "0 2px 4px rgba(0,0,0,0.1)", padding: "1rem 0" }}>
-//       <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//         <Link href="/" style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#2d3748" }}>
-//           buyall
-//         </Link>
-//         <div style={{ position: "relative" }}>
-//           <ShoppingCart style={{ width: "24px", height: "24px", color: "#4a5568" }} />
-//           {itemCount > 0 && (
-//             <span
-//               style={{
-//                 position: "absolute",
-//                 top: "-8px",
-//                 right: "-8px",
-//                 backgroundColor: "#e53e3e",
-//                 color: "#fff",
-//                 borderRadius: "50%",
-//                 width: "20px",
-//                 height: "20px",
-//                 display: "flex",
-//                 alignItems: "center",
-//                 justifyContent: "center",
-//                 fontSize: "0.75rem",
-//               }}
-//             >
-//               {itemCount}
-//             </span>
-//           )}
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
