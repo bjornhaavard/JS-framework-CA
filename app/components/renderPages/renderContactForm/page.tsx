@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 
 const RenderContactPage: React.FC = () => {
@@ -77,5 +76,3 @@ const RenderContactPage: React.FC = () => {
 };
 
 export default RenderContactPage;
-
-// use yup and react hook to validate form
