@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import useCartStore from "../store/userCartStore";
 import Link from "next/link";
+import Image from "next/image";
 
 const ShoppingCart: React.FC = () => {
   const { items, removeItem, updateQuantity, clearCart } = useCartStore();
@@ -51,7 +52,7 @@ const ShoppingCart: React.FC = () => {
           <>
             {items.map((item) => (
               <div key={item.id} className="flex flex-col sm:flex-row items-center justify-between mb-2">
-                <img src={item.image.url} alt={item.title} className="w-16 h-16 object-cover mr-4 mb-2 sm:mb-0" />
+                <Image src={item.image.url} alt={item.title} width={64} height={64} className="object-cover mr-4 mb-2 sm:mb-0" />
                 <span className="text-gray-800 mb-2 sm:mb-0">
                   {item.title} - ${item.price}
                 </span>
