@@ -87,6 +87,12 @@ interface Product {
   description: string;
   rating: number;
   price: number;
+  reviews: Array<{
+    description: string;
+    username: string;
+    rating: number;
+    id: number;
+  }>;
   image: {
     url: string;
     alt: string;
@@ -128,10 +134,25 @@ export default async function ProductDetail(context: GetStaticPropsContext): Pro
               <Image src={product.image.url} alt={product.image.alt} width={500} height={500} className="rounded-lg object-cover" unoptimized />
             </div>
           )}
-          <div className="w-full md:w-1/2 md:pl-6 mt-6 md:mt-0">
+          <div className="w-full md:w-1/2 md:pl-1 mt-6 md:mt-0">
             <p className="text-2xl font-bold text-gray-800 mb-4">Price: ${product.price}</p>
 
             <p className="text-sm text-gray-600 mb-6">Rating: {product.rating}</p>
+          </div>
+          <div className="w-full mt-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">User Reviews</h2>
+            <hr className="my-6 border-gray-300" />
+            {product.reviews.length > 0 ? (
+              product.reviews.map((review) => (
+                <div key={review.id} className="mb-4 p-4 border rounded-lg bg-gray-50">
+                  <p className="text-lg font-semibold text-gray-800">{review.username}</p>
+                  <p className="text-gray-700">{review.description}</p>
+                  <p className="text-sm text-gray-600">Rating: {review.rating}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-700">No reviews yet.</p>
+            )}
           </div>
 
           <div className="w-full mt-6"></div>

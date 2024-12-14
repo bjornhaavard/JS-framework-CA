@@ -1,20 +1,42 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import React from "react";
 import useCartStore from "../store/userCartStore";
 import Link from "next/link";
 
 const ShoppingCart: React.FC = () => {
   const { items, removeItem, updateQuantity, clearCart } = useCartStore();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading delay
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // const handleQuantityChange = (id: number, value: string) => {
-  //   const quantity = parseInt(value, 10);
-  //   if (!isNaN(quantity) && quantity > 0) {
-  //     updateQuantity(id, quantity);
-  //   }
-  // };
+  if (loading) {
+    return (
+      <>
+        <section className="blue-container">
+          <h1 className="heading">Shopping Cart</h1>
+        </section>
+        <div className="max-w-4xl mx-auto mt-8 p-4 border rounded shadow-lg mb-20">
+          <div className="animate-pulse">
+            <div className="h-6 bg-gray-300 rounded mb-4"></div>
+            <div className="h-6 bg-gray-300 rounded mb-4"></div>
+            <div className="h-6 bg-gray-300 rounded mb-4"></div>
+            <div className="h-6 bg-gray-300 rounded mb-4"></div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

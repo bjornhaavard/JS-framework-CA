@@ -1,16 +1,17 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import SearchForm from "./components/SeachForm";
-
+// import SearchForm from "./components/SearchForm";
+// import NavBar from "./components/navbar/NavBar";
 import useCartStore from "./store/userCartStore";
+import ProductFilter from "./product/ProductFilter";
 
 interface Product {
   id: number;
-  title: string;
   name: string;
+  title: string;
   description: string;
   price: number;
   image: {
@@ -21,11 +22,10 @@ interface Product {
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const query = searchParams.get("query") || "";
+
   const addItem = useCartStore((state) => state.addItem);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ const Products: React.FC = () => {
       try {
         const response = await fetch("https://v2.api.noroff.dev/online-shop");
         const result = await response.json();
+        console.log("Products:", result.data);
 
         if (Array.isArray(result.data)) {
           setProducts(result.data);
@@ -48,27 +49,18 @@ const Products: React.FC = () => {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    if (query) {
-      const filtered = products.filter((product) => product.name.toLowerCase().includes(query.toLowerCase()) || product.description.toLowerCase().includes(query.toLowerCase()));
-      setFilteredProducts(filtered);
-    } else {
-      setFilteredProducts(products);
-    }
-  }, [query, products]);
-
   if (!isClient) {
     return null;
   }
 
-  const displayProducts = filteredProducts.length > 0 ? filteredProducts : products;
+  const displayProducts = products;
 
   return (
     <>
       <section className="blue-container">
         <h1 className="heading">Welcome to buyall</h1>
         <p className="sub-heading">Feel free to browse and buy items</p>
-        <SearchForm />
+        <ProductFilter productList={products} />
       </section>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "1rem", paddingBottom: "2rem" }}>
         {displayProducts.map((product) => (
@@ -89,8 +81,9 @@ const Products: React.FC = () => {
               <Image src={product.image.url} alt={product.image.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} />
             </div>
             <div style={{ padding: "1rem", flex: "1 1 auto", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <h2 style={{ fontSize: "1.25rem", fontWeight: "600", marginBottom: "0.5rem", color: "#2d3748" }}>{product.title}</h2>
               <div>
-                <h2 style={{ fontSize: "1.25rem", fontWeight: "600", marginBottom: "0.5rem" }}>{product.name}</h2>
+                <h2 style={{ fontSize: "1.25rem", fontWeight: "600", marginBottom: "0.5rem", color: "#2d3748" }}>{product.name}</h2>
                 <p style={{ color: "#4a5568", marginBottom: "1rem" }}>{product.description}</p>
               </div>
               <p style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem", color: "#2d3748" }}>Price: ${product.price}</p>
