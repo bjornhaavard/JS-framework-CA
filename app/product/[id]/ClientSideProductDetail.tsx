@@ -20,7 +20,7 @@ export default function ClientSideProductDetail({ product }: { product: Product 
   const addToCart = useCartStore((state) => state.addItem);
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-4 mb-5">
       <button onClick={() => addToCart(product)} className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
         Add to Cart
       </button>
