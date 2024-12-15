@@ -32,10 +32,10 @@ const Products: React.FC = () => {
         const response = await fetch(process.env.NEXT_PUBLIC_API_URL as string);
         const result = await response.json();
 
-        if (Array.isArray(result.data)) {
-          setProducts(result.data);
+        if (Array.isArray(result)) {
+          setProducts(result);
         } else {
-          console.error("Fetched data is not an array:", result.data);
+          console.error("Fetched data is not an array:", result);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
