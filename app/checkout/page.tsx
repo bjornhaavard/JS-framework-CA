@@ -14,7 +14,7 @@ const ShoppingCart: React.FC = () => {
     // Simulate a loading delay
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -79,17 +79,19 @@ const ShoppingCart: React.FC = () => {
             <div className="mt-4">
               <strong className="text-gray-800">Total: ${totalPrice.toFixed(2)}</strong>
             </div>
-            <button onClick={clearCart} className="mt-4 px-4 py-2 bg-gray-800 text-white rounded">
-              Clear Cart
-            </button>
-            <button
-              onClick={() => {
-                clearCart();
-              }}
-              className="mt-4 ml-0 sm:ml-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-500 transition duration-300"
-            >
-              <Link href="/checkoutSuccess">Checkout</Link>
-            </button>
+            <div className="flex justify-flex-start">
+              <button onClick={clearCart} className="mt-4 mr-4 px-4 py-2 bg-gray-800 text-white rounded">
+                Clear Cart
+              </button>
+              <button
+                onClick={() => {
+                  clearCart();
+                }}
+                className="mt-4 ml-0 sm:ml-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-500 transition duration-300"
+              >
+                <Link href="/checkoutSuccess">Checkout</Link>
+              </button>
+            </div>
           </>
         )}
       </div>
