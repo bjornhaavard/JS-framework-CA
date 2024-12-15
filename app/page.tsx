@@ -31,7 +31,6 @@ const Products: React.FC = () => {
       try {
         const response = await fetch(process.env.NEXT_PUBLIC_API_URL as string);
         const result = await response.json();
-        console.log("Products:", result.data);
 
         if (Array.isArray(result.data)) {
           setProducts(result.data);
@@ -60,7 +59,7 @@ const Products: React.FC = () => {
         <ProductFilter productList={products} />
       </section>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "1rem", paddingBottom: "2rem" }}>
-        {displayProducts.map((product) => (
+        {displayProducts.map((product, index) => (
           <div
             key={product.id}
             style={{
@@ -74,8 +73,8 @@ const Products: React.FC = () => {
               margin: "2rem 0",
             }}
           >
-            <div style={{ width: "100%", height: "300px", position: "relative" }}>
-              <Image src={product.image.url} alt={product.image.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} />
+            <div style={{ width: "100%", paddingTop: "100%", height: "300px", position: "relative" }}>
+              <Image src={product.image.url} alt={product.image.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} priority={index === 0} />
             </div>
             <div style={{ padding: "1rem", flex: "1 1 auto", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <h2 style={{ fontSize: "1.25rem", fontWeight: "600", marginBottom: "0.5rem", color: "#2d3748" }}>{product.title}</h2>
