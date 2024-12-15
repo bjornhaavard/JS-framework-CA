@@ -3,8 +3,6 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// import SearchForm from "./components/SearchForm";
-// import NavBar from "./components/navbar/NavBar";
 import useCartStore from "./store/userCartStore";
 import ProductFilter from "./product/ProductFilter";
 
@@ -22,7 +20,6 @@ interface Product {
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
 
@@ -32,7 +29,7 @@ const Products: React.FC = () => {
     setIsClient(true);
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://v2.api.noroff.dev/online-shop");
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL as string);
         const result = await response.json();
         console.log("Products:", result.data);
 

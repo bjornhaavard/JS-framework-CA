@@ -31,7 +31,6 @@ const ProductDetail = () => {
         try {
           const response = await fetch(`https://v2.api.noroff.dev/online-shop/${id}`);
 
-          console.log("Product:", response);
           const product = await response.json();
 
           setProduct(product);

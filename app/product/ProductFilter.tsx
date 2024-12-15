@@ -18,8 +18,6 @@ const ProductFilter: React.FC<ProductFilterProps> = ({ productList }) => {
 
   const filterProducts = productList.filter((product) => product.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
-  console.log("filterProducts", filterProducts);
-
   return (
     <div className="relative w-full mx-auto p-4 max-w-xs">
       <Input placeholder="Search products here" className="w-full max-w-xs search-form" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value.trim())} />
