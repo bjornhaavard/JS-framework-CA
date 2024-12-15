@@ -21,10 +21,10 @@ export default function ClientSideProductDetail({ product }: { product: Product 
 
   return (
     <div className="flex space-x-4 mb-5">
-      <button onClick={() => addToCart(product)} className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
+      <button onClick={() => addToCart(product)} className="button-grey">
         Add to Cart
       </button>
-      <button className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
+      <button className="button-blue">
         <Link href="/">Back to Products</Link>
       </button>
     </div>

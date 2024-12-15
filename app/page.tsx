@@ -85,20 +85,10 @@ const Products: React.FC = () => {
               <p style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem", color: "#2d3748" }}>Price: ${product.price}</p>
             </div>
             <div style={{ padding: "1rem", display: "flex", gap: "0.5rem" }}>
-              <button
-                style={{ backgroundColor: "#4a5568", color: "#fff", padding: "0.5rem 1rem", borderRadius: "0.25rem", cursor: "pointer", transition: "background-color 0.3s" }}
-                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#2d3748")}
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#4a5568")}
-                onClick={() => addItem(product)}
-              >
+              <button className="button-grey" onClick={() => addItem(product)}>
                 Add to Cart
               </button>
-              <button
-                style={{ backgroundColor: "#3182ce", color: "#fff", padding: "0.5rem 1rem", borderRadius: "0.25rem", cursor: "pointer", transition: "background-color 0.3s" }}
-                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#2b6cb0")}
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#3182ce")}
-                onClick={() => router.push(`/product/${product.id}`)}
-              >
+              <button className="button-blue" onClick={() => router.push(`/product/${product.id}`)}>
                 View Product
               </button>
             </div>

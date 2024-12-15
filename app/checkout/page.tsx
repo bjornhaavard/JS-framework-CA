@@ -80,14 +80,14 @@ const ShoppingCart: React.FC = () => {
               <strong className="text-gray-800">Total: ${totalPrice.toFixed(2)}</strong>
             </div>
             <div className="flex justify-flex-start">
-              <button onClick={clearCart} className="mt-4 mr-4 px-4 py-2 bg-gray-800 text-white rounded">
+              <button onClick={clearCart} className="mt-4 mr-4 px-4 py-2 button-grey">
                 Clear Cart
               </button>
               <button
                 onClick={() => {
                   clearCart();
                 }}
-                className="mt-4 ml-0 sm:ml-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-500 transition duration-300"
+                className="mt-4 ml-0 sm:ml-4 button-green"
               >
                 <Link href="/checkoutSuccess">Checkout</Link>
               </button>
