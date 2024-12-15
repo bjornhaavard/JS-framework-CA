@@ -29,17 +29,14 @@ const Products: React.FC = () => {
     setIsClient(true);
     const fetchProducts = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-        if (!apiUrl) {
-          throw new Error("NEXT_PUBLIC_API_URL is not defined");
-        }
-        const response = await fetch(apiUrl);
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL as string);
         const result = await response.json();
+        console.log(result);
 
-        if (Array.isArray(result)) {
-          setProducts(result);
+        if (Array.isArray(result.data)) {
+          setProducts(result.data);
         } else {
-          console.error("Fetched data is not an array:", result);
+          console.error("Fetched data is not an array:", result.data);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
