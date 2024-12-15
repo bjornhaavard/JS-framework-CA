@@ -21,21 +21,19 @@ interface Product {
 }
 
 async function getProduct(id: string): Promise<Product> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`);
+  const res = await fetch(`https://v2.api.noroff.dev/online-shop/${id}`);
   const data = await res.json();
   return data.data;
 }
 
 export async function generateStaticParams() {
   // Fetch all product IDs
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL);
+  const res = await fetch("https://v2.api.noroff.dev/online-shop");
   const data = await res.json();
 
-  return data.data
-    .filter((product: Product) => product.id !== undefined)
-    .map((product: Product) => ({
-      id: product.id.toString(),
-    }));
+  return data.data.map((product: Product) => ({
+    id: product.id.toString(),
+  }));
 }
 
 import { GetStaticPropsContext } from "next";

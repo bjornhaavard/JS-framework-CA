@@ -29,7 +29,7 @@ const Products: React.FC = () => {
     setIsClient(true);
     const fetchProducts = async () => {
       try {
-        const response = await fetch(process.env.NEXT_PUBLIC_API_URL as string);
+        const response = await fetch("https://v2.api.noroff.dev/online-shop");
         const result = await response.json();
         console.log(result);
 
