@@ -31,7 +31,6 @@ const Products: React.FC = () => {
       try {
         const response = await fetch(process.env.NEXT_PUBLIC_API_URL as string);
         const result = await response.json();
-        console.log(result);
 
         if (Array.isArray(result.data)) {
           setProducts(result.data);

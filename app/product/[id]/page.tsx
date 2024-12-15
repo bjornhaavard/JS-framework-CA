@@ -21,14 +21,14 @@ interface Product {
 }
 
 async function getProduct(id: string): Promise<Product> {
-  const res = await fetch(`https://v2.api.noroff.dev/online-shop/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`);
   const data = await res.json();
   return data.data;
 }
 
 export async function generateStaticParams() {
   // Fetch all product IDs
-  const res = await fetch("https://v2.api.noroff.dev/online-shop");
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL);
   const data = await res.json();
 
   return data.data.map((product: Product) => ({
