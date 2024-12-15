@@ -31,9 +31,11 @@ export async function generateStaticParams() {
   const res = await fetch(process.env.NEXT_PUBLIC_API_URL);
   const data = await res.json();
 
-  return data.data.map((product: Product) => ({
-    id: product.id.toString(),
-  }));
+  return data.data
+    .filter((product: Product) => product.id !== undefined)
+    .map((product: Product) => ({
+      id: product.id.toString(),
+    }));
 }
 
 import { GetStaticPropsContext } from "next";
