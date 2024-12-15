@@ -29,7 +29,11 @@ const Products: React.FC = () => {
     setIsClient(true);
     const fetchProducts = async () => {
       try {
-        const response = await fetch(process.env.NEXT_PUBLIC_API_URL as string);
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        if (!apiUrl) {
+          throw new Error("NEXT_PUBLIC_API_URL is not defined");
+        }
+        const response = await fetch(apiUrl);
         const result = await response.json();
 
         if (Array.isArray(result)) {
