@@ -7,6 +7,7 @@ interface Product {
   title: string;
   description: string;
   rating: number;
+  discountedPrice: number;
   price: number;
   reviews: Array<{
     description: string;
@@ -56,9 +57,10 @@ export default async function ProductDetail(context: GetStaticPropsContext): Pro
             </div>
           )}
           <div className="w-full md:w-1/2 md:pl-1 mt-6 md:mt-0">
-            <p className="text-2xl font-bold text-gray-800 mb-4">Price: ${product.price}</p>
-
-            <p className="text-sm text-gray-600 mb-6">Rating: {product.description}</p>
+            <p className="text-2xl font-bold text-gray-800 mb-4">
+              Price: <span className="line-through">${product.price}</span> <span className="text-red-500">${product.discountedPrice}</span>
+            </p>
+            <p className="text-sm text-gray-600 mb-6">Description: {product.description}</p>
             <p className="text-sm text-gray-600 mb-6">Rating: {product.rating}</p>
           </div>
           <div className="w-full mt-6">
