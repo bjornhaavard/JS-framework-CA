@@ -1,5 +1,7 @@
 "use client";
 
+// Ensure the preloaded resource is used appropriately or remove the preload link if not necessary
+
 import { useEffect, useState } from "react";
 import React from "react";
 import useCartStore from "../store/userCartStore";
@@ -70,7 +72,7 @@ const ShoppingCart: React.FC = () => {
                   <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-2 py-1 bg-gray-800 rounded">
                     +
                   </button>
-                  <button onClick={() => removeItem(item.id)} className="ml-2 px-2 py-1 bg-gray-800 rounded">
+                  <button onClick={() => removeItem(item.id)} className="ml-2 px-2 py-1 button-grey">
                     Remove
                   </button>
                 </div>
@@ -80,7 +82,7 @@ const ShoppingCart: React.FC = () => {
               <strong className="text-gray-800">Total: ${totalPrice.toFixed(2)}</strong>
             </div>
             <div className="flex justify-flex-start">
-              <button onClick={clearCart} className="mt-4 mr-4 px-4 py-2 button-grey">
+              <button onClick={clearCart} className="mt-4 mr-4 px-4 py-2 button-gray">
                 Clear Cart
               </button>
               <button

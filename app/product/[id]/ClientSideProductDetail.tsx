@@ -21,7 +21,7 @@ export default function ClientSideProductDetail({ product }: { product: Product 
 
   return (
     <div className="flex space-x-4 mb-5">
-      <button onClick={() => addToCart(product)} className="button-grey">
+      <button onClick={() => addToCart(product)} className="button-gray">
         Add to Cart
       </button>
       <button className="button-blue">

@@ -31,7 +31,7 @@
 
   /* Buttons */
 
-  .button-grey {
+  .button-gray {
     @apply bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300;
   }
   .button-blue {

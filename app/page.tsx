@@ -85,7 +85,7 @@ const Products: React.FC = () => {
               <p style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem", color: "#2d3748" }}>Price: ${product.price}</p>
             </div>
             <div style={{ padding: "1rem", display: "flex", gap: "0.5rem" }}>
-              <button className="button-grey" onClick={() => addItem(product)}>
+              <button className="button-gray" onClick={() => addItem(product)}>
                 Add to Cart
               </button>
               <button className="button-blue" onClick={() => router.push(`/product/${product.id}`)}>
