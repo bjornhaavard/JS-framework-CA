@@ -7,6 +7,7 @@ import React from "react";
 import useCartStore from "../store/userCartStore";
 import Link from "next/link";
 import Image from "next/image";
+import LoadingCart from "../components/Ui/loadingCart";
 
 const ShoppingCart: React.FC = () => {
   const { items, removeItem, updateQuantity, clearCart } = useCartStore();
@@ -16,7 +17,7 @@ const ShoppingCart: React.FC = () => {
     // Simulate a loading delay
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);
@@ -26,17 +27,7 @@ const ShoppingCart: React.FC = () => {
   if (loading) {
     return (
       <>
-        <section className="blue-container">
-          <h1 className="heading">Shopping Cart</h1>
-        </section>
-        <div className="max-w-4xl mx-auto mt-8 p-4 border rounded shadow-lg mb-20">
-          <div className="animate-pulse">
-            <div className="h-6 bg-gray-300 rounded mb-4"></div>
-            <div className="h-6 bg-gray-300 rounded mb-4"></div>
-            <div className="h-6 bg-gray-300 rounded mb-4"></div>
-            <div className="h-6 bg-gray-300 rounded mb-4"></div>
-          </div>
-        </div>
+        <LoadingCart items={items} />
       </>
     );
   }
@@ -54,12 +45,14 @@ const ShoppingCart: React.FC = () => {
           <>
             {items.map((item) => (
               <div key={item.id} className="flex flex-col sm:flex-row items-center justify-between mb-2">
-                <Image src={item.image.url} alt={item.title} width={64} height={64} className="object-cover mr-4 mb-2 sm:mb-0" />
+                <div className="relative w-16 h-16 mr-4 mb-2 sm:mb-0">
+                  <Image src={item.image.url} alt={item.title} fill sizes="64px" className="object-cover rounded" />
+                </div>
                 <span className="text-gray-800 mb-2 sm:mb-0">
                   {item.title} - ${item.price}
                 </span>
                 <div className="flex items-center">
-                  <button onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))} className="px-2 py-1 bg-gray-800 rounded">
+                  <button onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))} className="px-2 py-1 bg-gray-800 text-white rounded">
                     -
                   </button>
                   <input
@@ -69,10 +62,10 @@ const ShoppingCart: React.FC = () => {
                     onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
                     className="w-16 mx-2 px-2 py-1 border rounded text-gray-800"
                   />
-                  <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-2 py-1 bg-gray-800 rounded">
+                  <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-2 py-1 bg-gray-800 text-white rounded">
                     +
                   </button>
-                  <button onClick={() => removeItem(item.id)} className="ml-2 px-2 py-1 button-grey">
+                  <button onClick={() => removeItem(item.id)} className="ml-2 px-2 py-1 button-gray">
                     Remove
                   </button>
                 </div>
@@ -85,14 +78,11 @@ const ShoppingCart: React.FC = () => {
               <button onClick={clearCart} className="mt-4 mr-4 px-4 py-2 button-gray">
                 Clear Cart
               </button>
-              <button
-                onClick={() => {
-                  clearCart();
-                }}
-                className="mt-4 ml-0 sm:ml-4 button-green"
-              >
-                <Link href="/checkoutSuccess">Checkout</Link>
-              </button>
+              <Link href="/checkoutSuccess" className="mt-4 ml-0 sm:ml-4">
+                <button onClick={clearCart} className="button-green px-4 py-2">
+                  Checkout
+                </button>
+              </Link>
             </div>
           </>
         )}
