@@ -1,6 +1,12 @@
 "use client";
 
 // Ensure the preloaded resource is used appropriately or remove the preload link if not necessary
+if (typeof document !== "undefined") {
+  const preloadLink = document.querySelector('link[rel="preload"][href*="4473ecc91f70f139-s.p.woff"]');
+  if (preloadLink) {
+    preloadLink.remove();
+  }
+}
 
 import { useEffect, useState } from "react";
 import React from "react";
