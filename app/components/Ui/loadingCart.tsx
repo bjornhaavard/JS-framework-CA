@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BlueContainerCart } from "./BlueContainer";
 
 interface Item {
   price: number;
@@ -15,9 +16,7 @@ const LoadingCart: React.FC<LoadingCartProps> = ({ items }) => {
   if (loading) {
     return (
       <>
-        <section className="blue-container">
-          <h1 className="heading">Shopping Cart</h1>
-        </section>
+        <BlueContainerCart />
         <div className="max-w-4xl mx-auto mt-8 p-4 border rounded shadow-lg mb-20">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">Loading...</h2>
           <div className="animate-pulse">

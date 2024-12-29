@@ -8,3 +8,19 @@ export default function BlueContainerContact() {
     </section>
   );
 }
+
+export function BlueContainerCart() {
+  return (
+    <section className="blue-container">
+      <h1 className="heading">Shopping Cart</h1>
+    </section>
+  );
+}
+
+export function BlueContainerProfile() {
+  return (
+    <section className="blue-container">
+      <h1 className="heading">Profile Page</h1>
+    </section>
+  );
+}

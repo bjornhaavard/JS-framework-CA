@@ -14,6 +14,7 @@ import useCartStore from "../store/userCartStore";
 import Link from "next/link";
 import Image from "next/image";
 import LoadingCart from "../components/Ui/loadingCart";
+import { BlueContainerCart } from "../components/Ui/BlueContainer";
 
 const ShoppingCart: React.FC = () => {
   const { items, removeItem, updateQuantity, clearCart } = useCartStore();
@@ -40,11 +41,9 @@ const ShoppingCart: React.FC = () => {
 
   return (
     <>
-      <section className="blue-container">
-        <h1 className="heading">Shopping Cart</h1>
-      </section>
+      <BlueContainerCart />
       <div className="max-w-4xl mx-auto mt-8 p-4 border rounded shadow-lg mb-20">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Shopping Cart</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Items in cart</h2>
         {items.length === 0 ? (
           <p className="text-gray-800">Your cart is empty</p>
         ) : (
