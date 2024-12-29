@@ -50,7 +50,7 @@ const ShoppingCart: React.FC = () => {
         ) : (
           <>
             {items.map((item) => (
-              <div key={item.id} className="flex flex-col sm:flex-row items-center justify-between mb-2">
+              <div key={item.id} className="flex flex-col sm:flex-row items-center justify-between mb-2 pb-2 border-b border-gray-200 last:border-b-0">
                 <div className="relative w-16 h-16 mr-4 mb-2 sm:mb-0">
                   <Image src={item.image.url} alt={item.title} fill sizes="64px" className="object-cover rounded" />
                 </div>
