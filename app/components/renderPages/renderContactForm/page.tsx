@@ -1,6 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import BlueContainerContact from "../../Ui/BlueContainer";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -11,49 +12,40 @@ const schema = yup.object().shape({
 });
 
 const RenderContactPage: React.FC = () => {
-  const [name, setName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [showModal, setShowModal] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    try {
-      await schema.validate({ name, subject, email, message }, { abortEarly: false });
-      console.log("Name:", name);
-      console.log("Subject:", subject);
-      console.log("Email:", email);
-      console.log("Message:", message);
-      setShowModal(true);
-      setTimeout(() => {
-        setShowModal(false);
-        setName("");
-        setSubject("");
-        setEmail("");
-        setMessage("");
-        setErrors({});
-      }, 2000);
-    } catch (err) {
-      if (err instanceof yup.ValidationError) {
-        const validationErrors: { [key: string]: string } = {};
-        err.inner.forEach((error) => {
-          if (error.path) validationErrors[error.path] = error.message;
-        });
-        setErrors(validationErrors);
-      }
-    }
+  interface FormData {
+    name: string;
+    subject: string;
+    email: string;
+    message: string;
+  }
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+    // Handle form submission
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+      reset();
+    }, 2000);
   };
+
+  const [showModal, setShowModal] = React.useState(false);
 
   return (
     <>
-      <section className="blue-container text-center mb-6">
-        <h1 className="heading">Contact Us</h1>
-        <p className="sub-heading">We would love to hear from you! Please fill out the form below to get in touch.</p>
-      </section>
+      <BlueContainerContact />
+
       <div className="text-center mb-16">
-        <form className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md mx-auto" onSubmit={handleSubmit}>
+        <form className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Name
@@ -63,10 +55,9 @@ const RenderContactPage: React.FC = () => {
               id="name"
               type="text"
               placeholder="Full name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              {...register("name")}
             />
-            {errors.name && <p className="text-red-500 text-xs italic">{errors.name}</p>}
+            {errors.name && <p className="text-red-500 text-xs italic">{errors.name.message}</p>}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="subject">
@@ -77,10 +68,9 @@ const RenderContactPage: React.FC = () => {
               id="subject"
               type="text"
               placeholder="Subject"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
+              {...register("subject")}
             />
-            {errors.subject && <p className="text-red-500 text-xs italic">{errors.subject}</p>}
+            {errors.subject && <p className="text-red-500 text-xs italic">{errors.subject.message}</p>}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -91,10 +81,9 @@ const RenderContactPage: React.FC = () => {
               id="email"
               type="email"
               placeholder="Your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              {...register("email")}
             />
-            {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
+            {errors.email && <p className="text-red-500 text-s italic">{errors.email.message}</p>}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
@@ -105,10 +94,9 @@ const RenderContactPage: React.FC = () => {
               id="message"
               placeholder="Your message"
               rows={5}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              {...register("message")}
             />
-            {errors.message && <p className="text-red-500 text-xs italic">{errors.message}</p>}
+            {errors.message && <p className="text-red-500 text-xs italic">{errors.message.message}</p>}
           </div>
 
           <div className="flex items-center justify-between">
