@@ -32,13 +32,42 @@
   /* Buttons */
 
   .button-gray {
-    @apply bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300;
+    @apply bg-gray-800 text-white px-4 py-2 rounded transition-colors duration-300 hover:bg-gray-300 active:bg-gray-400;
   }
-  .button-blue {
+  /* .button-blue {
     @apply bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300;
-  }
+  } */
   .button-green {
     @apply bg-green-600 text-white py-2 px-4 rounded hover:bg-green-500 transition duration-300;
+  }
+  .button-blue {
+    @apply bg-blue-500 text-white px-4 py-2 rounded transition-colors duration-300 hover:bg-blue-600 active:bg-blue-700;
+  }
+
+  /* Add to cart animation */
+  .animate-add-to-cart {
+    animation: addToCartPulse 0.3s ease-in-out;
+  }
+
+  .add-to-cart-text,
+  .add-to-cart-check {
+    @apply transition-all duration-300 ease-in-out absolute;
+  }
+
+  .add-to-cart-check {
+    @apply text-green-300;
+  }
+
+  @keyframes addToCartPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   /* Cards */
