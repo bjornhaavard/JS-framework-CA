@@ -1,7 +1,8 @@
+"use client";
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import BlueContainerContact from "../../Ui/BlueContainer";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -17,18 +18,12 @@ const RenderContactPage: React.FC = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  interface FormData {
-    name: string;
-    subject: string;
-    email: string;
-    message: string;
-  }
-
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: { name: string; subject: string; email: string; message: string }) => {
     console.log(data);
     // Handle form submission
     setShowModal(true);
@@ -42,8 +37,10 @@ const RenderContactPage: React.FC = () => {
 
   return (
     <>
-      <BlueContainerContact />
-
+      <section className="blue-container text-center mb-6">
+        <h1 className="heading">Contact Us</h1>
+        <p className="sub-heading">We would love to hear from you! Please fill out the form below to get in touch.</p>
+      </section>
       <div className="text-center mb-16">
         <form className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -56,6 +53,7 @@ const RenderContactPage: React.FC = () => {
               type="text"
               placeholder="Full name"
               {...register("name")}
+              onChange={(e) => setValue("name", e.target.value)}
             />
             {errors.name && <p className="text-red-500 text-xs italic">{errors.name.message}</p>}
           </div>
@@ -69,6 +67,7 @@ const RenderContactPage: React.FC = () => {
               type="text"
               placeholder="Subject"
               {...register("subject")}
+              onChange={(e) => setValue("subject", e.target.value)}
             />
             {errors.subject && <p className="text-red-500 text-xs italic">{errors.subject.message}</p>}
           </div>
@@ -82,8 +81,9 @@ const RenderContactPage: React.FC = () => {
               type="email"
               placeholder="Your email"
               {...register("email")}
+              onChange={(e) => setValue("email", e.target.value)}
             />
-            {errors.email && <p className="text-red-500 text-s italic">{errors.email.message}</p>}
+            {errors.email && <p className="text-red-500 text-xs italic">{errors.email.message}</p>}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
@@ -95,6 +95,7 @@ const RenderContactPage: React.FC = () => {
               placeholder="Your message"
               rows={5}
               {...register("message")}
+              onChange={(e) => setValue("message", e.target.value)}
             />
             {errors.message && <p className="text-red-500 text-xs italic">{errors.message.message}</p>}
           </div>
