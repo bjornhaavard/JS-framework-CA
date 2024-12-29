@@ -5,7 +5,7 @@ import RenderContactPage from "../components/renderPages/renderContactForm/page"
 
 const ContactForm: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center items-center  bg-gray-100">
+    <div>
       <RenderContactPage />
     </div>
   );
