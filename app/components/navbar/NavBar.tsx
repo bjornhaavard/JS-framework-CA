@@ -40,7 +40,7 @@ export function NavBar() {
             </DisclosureButton>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center font-extrabold">
+            <Link href="/" className="flex shrink-0 items-center font-extrabold">
               <Image
                 aria-label="BuyAll"
                 src="/images/BuyAll.png"
@@ -50,7 +50,7 @@ export function NavBar() {
                 quality={80}
                 className="h-8 w-auto rounded-lg" // Adjusted height to control the size
               />
-            </div>
+            </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
