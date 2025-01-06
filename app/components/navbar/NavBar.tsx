@@ -48,7 +48,7 @@ export function NavBar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <Link href="/" className="flex shrink-0 items-center font-extrabold">
-                  <Image src="/images/BuyAll.png" alt="BuyAll Logo" width={40} height={24} quality={80} className="h-8 w-auto rounded-lg" />
+                  <Image src="/images/BuyAll-circle.png" alt="BuyAll Logo" width={40} height={24} quality={80} className="h-8 w-auto rounded-lg" />
                 </Link>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
