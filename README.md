@@ -2,7 +2,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Project Overview
 
-This project is a comprehensive example of a Next.js application, demonstrating the use of modern web development practices and tools. It includes features such as server-side rendering, static site generation, and API routes.
+This project is a comprehensive example of a Next.js application, demonstrating the use of modern web development practices and tools. It includes features such as server-side rendering, static site generation, and API routes. 
+This is a example e-commerce site made for study purposes under Noroff guidance.
 
 ## Features
 
@@ -34,20 +35,6 @@ pnpm install
 bun install
 ```
 
-## Running Tests
-
-To run tests, use the following command:
-
-```bash
-npm test
-# or
-yarn test
-# or
-pnpm test
-# or
-bun test
-```
-
 ## Contributing
 
 Contributions are always welcome! Please follow these steps to contribute:
@@ -67,5 +54,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 If you have any questions or feedback, feel free to reach out:
 
-- Author: Bjorn
+- Author: Bjørn Håvard Steinnes
 - Email: bjornhaavard@hotmail.com
