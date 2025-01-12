@@ -24,7 +24,7 @@ const RenderContactPage: React.FC = () => {
   });
 
   const onSubmit = (data: { name: string; subject: string; email: string; message: string }) => {
-    console.log(data);
+    console.log(`Name: ${data.name}, Subject: ${data.subject}, Email: ${data.email}, Message: ${data.message}`);
     // Handle form submission
     setShowModal(true);
     setTimeout(() => {
