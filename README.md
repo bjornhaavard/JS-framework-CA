@@ -1,31 +1,67 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 BuyAll – E-commerce Store (Student Project)
 
-![Buyall screenshot](https://private-user-images.githubusercontent.com/94046432/442502297-96b76965-cf6a-4b2d-b65f-872b64b1bf6f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDY5NjYzMTIsIm5iZiI6MTc0Njk2NjAxMiwicGF0aCI6Ii85NDA0NjQzMi80NDI1MDIyOTctOTZiNzY5NjUtY2Y2YS00YjJkLWI2NWYtODcyYjY0YjFiZjZmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA1MTElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNTExVDEyMjAxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTBlMjViYWE0MzNmODc3ZDg1ODMyMjc2OGEyMjIwOGM0Mzk3MTZmNzhlNjU5ZmYyMWQyN2Y0NjFhYTlhYzU2ZGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.16_YtO_JofNP997vr6hYvIBtlCg3_06nu7JvNQv8NL4)
+This is a responsive eCommerce web application built with **Next.js** as part of a student project at **Noroff**. The goal was to apply knowledge of **React**, **API consumption**, and **routing** to build a modern online store from scratch.
 
-## Project Overview
+![BuyAll Screenshot](https://private-user-images.githubusercontent.com/94046432/442502297-96b76965-cf6a-4b2d-b65f-872b64b1bf6f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDY5NjYzMTIsIm5iZiI6MTc0Njk2NjAxMiwicGF0aCI6Ii85NDA0NjQzMi80NDI1MDIyOTctOTZiNzY5NjUtY2Y2YS00YjJkLWI2NWYtODcyYjY0YjFiZjZmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA1MTElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNTExVDEyMjAxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTBlMjViYWE0MzNmODc3ZDg1ODMyMjc2OGEyMjIwOGM0Mzk3MTZmNzhlNjU5ZmYyMWQyN2Y0NjFhYTlhYzU2ZGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.16_YtO_JofNP997vr6hYvIBtlCg3_06nu7JvNQv8NL4) <!-- Replace with your actual image path -->
 
-This project is a comprehensive example of a Next.js application, demonstrating the use of modern web development practices and tools. It includes features such as server-side rendering, static site generation, and API routes. 
-This is a example e-commerce site made for study purposes under Noroff guidance.
+---
 
-## Features
+## 📖 Project Overview
 
-- **Server-Side Rendering (SSR)**: Fetch data and render pages on the server.
-- **Static Site Generation (SSG)**: Pre-render pages at build time for better performance.
-- **API Routes**: Create API endpoints with ease using Next.js API routes.
-- **CSS Modules**: Scoped CSS to avoid conflicts and ensure maintainability.
-- **TypeScript**: Type-safe development with TypeScript integration.
-- **ESLint and Prettier**: Code quality tools for consistent and error-free code.
+BuyAll is a fictional eCommerce store built for learning purposes. It showcases core frontend skills using **Next.js**, integrating with the [Noroff Online Shop API](https://v2.api.noroff.dev/online-shop). Users can browse products, view individual product details, add items to a cart, and complete a mock checkout. A contact form is also included with validation.
 
-## Prerequisites
+This project demonstrates the use of modern web development practices such as **dynamic routing**, **component-based architecture**, **state management**, and **form handling**.
 
-Before you begin, ensure you have met the following requirements:
+---
 
-- Node.js (>= 14.x)
-- npm, yarn, pnpm, or bun (one of these package managers)
+## 🚀 Features
 
-## Installation
+- **Homepage**
+  - Fetches and displays all products from the API
+  - Real-time search with look-ahead filtering
 
-To install the dependencies, run one of the following commands:
+- **Product Page**
+  - Displays detailed info including reviews, images, description, and pricing
+  - Calculates and shows discount percentage if applicable
+  - "Add to Cart" functionality
+
+- **Cart Page**
+  - Lists all items in cart with quantities and a running total
+  - Includes a "Checkout" button
+
+- **Checkout Success Page**
+  - Confirmation message after checkout
+  - Automatically clears cart
+  - Link to return to homepage
+
+- **Contact Page**
+  - Form with client-side validation
+  - Required fields: Full Name, Subject, Email, Message
+
+- **Reusable Layout**
+  - Shared layout with Header, Footer, and Cart icon displaying item count
+
+- **Responsive Design**
+  - Mobile-first approach using Tailwind CSS or CSS Modules (update this if needed)
+
+---
+
+## 🔧 Technologies Used
+
+- [Next.js](https://nextjs.org/)
+- React
+- Tailwind CSS / CSS Modules (depending on your implementation)
+- JavaScript
+- ESLint & Prettier
+
+---
+
+## 📦 Installation
+
+Make sure you have **Node.js v14+** installed.
+
+Install dependencies:
 
 ```bash
 npm install
